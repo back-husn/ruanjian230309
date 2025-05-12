@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 步骤一：引入echarts -->
+    <script src="./node_modules/echarts/dist/echarts.js"></script>
+</head>
+<body>
+     <!-- 步骤二：准备一个呈现效果的盒子 -->
+     <div id="app" style="height: 400px; width: 1000px;"></div>
+     <script>
+        // 步骤三：初始化echarts实例对象
+        let myEcharts = echarts.init(document.getElementById('app'));
+          // 步骤四：准备配置项
+          let xData =['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+          let yData=[3000,2800,900,1000,800,2500,600,400,2255,2600,990,600]
+          let option = {
+            xAxis:{
+                type: 'category',
+                data:xData,
+                
+            },
+            yAxis:{
+                
+                },
+            series:[
+                {
+                    smooth:true,//平滑程度
+                    lineStyle:{ 
+                        color:'yellow',//线条颜色
+                        type:'dotted',//实线
+                    },
+                    name:'销量',
+                    // 折线图
+                    type:'line',
+                    data:yData,
+                    markPoint:{
+                    data:[
+                        {type:'max',name:'最大值'},
+                        {type:'min',name:'最小值'},
+                      
+                    ]
+                   
+                }
+                ,
+                areaStyle:{
+                    color:'pink'
+                },
+                // 标注区间
+                markArea:{
+                    data: [
+                            [
+                                {xAxis:'一月'},
+                                {xAxis:'二月'},
+                            ],
+                            
+                            [
+                                {xAxis:'七月'},
+                                {xAxis:'八月'},
+                            ]
+      ]
+                },
+                
+                markLine: { // 将 markLine 移到 series 内部
+                    data: [
+                        {type: 'average', name: '平均值'}
+                    ]
+                },
+                
+                // 柱颜色
+                itemStyle:{
+                    color:'black'
+                }
+                }
+            ]
+          }
+
+        // 步骤五：将配置项设置给echarts实例对象
+        myEcharts.setOption(option);
+     </script>
+     
+</body>
+</html>
